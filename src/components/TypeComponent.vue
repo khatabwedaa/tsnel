@@ -7,7 +7,7 @@
             <div class="text-2xl">Score : <span class="text-blue-600 font-semibold">{{ countScore }}</span></div>
         </div>
         <input v-model="model" class="mt-6 bg-gray-300 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email">
-        <button class="w-full mt-4 px-4 py-2 bg-blue-600 text-white uppercase rounded" @click="restart" v-if="countDown == 0">restart</button>
+        <button class="w-full mt-6 px-4 py-2 bg-blue-600 text-white uppercase rounded" @click="start">start</button>
     </div>
 </template>
 
@@ -15,10 +15,10 @@
     export default {
         data() {
             return {
-                word: 'start',
+                word: 'press start button',
                 countDown: 5,
                 model: '',
-                words: ['php' , 'vue' , 'bostman' , 'api' , 'laravel' , 'laracon' , 'laracast'],
+                words: [ 'php' , 'john' , 'bostman' , 'steve' , 'text' , 'laracon' , 'laracast' , 'haha' , 'iphone' , 'banana' , 'world' , 'cars' , 'cats' , 'vscode' ],
                 countScore: 0 ,
                 arr: 0
             }
@@ -28,7 +28,7 @@
                 if(this.countDown > 0) {
                     setTimeout(() => {
                         this.countDown -= 1
-                        console.log(this.isTrue())
+                        this.isTrue()
                         this.countDownTimer()
                     }, 1000)
                 }
@@ -40,22 +40,17 @@
                     this.model = ''
                     this.word = this.words[this.arr]; this.arr++
                     this.countScore += 5
-                    return "Yes"
                 }
-
-                return "NO"
             },
-            restart() {
+            start() {
                 this.model = ""
                 this.arr = 0
                 this.word = this.words[this.arr]; this.arr++
                 this.countScore = 0
                 this.countDown = 5
                 this.countDownTimer()
+                this.isTrue()
             }
-        },
-        mounted() {
-            this.countDownTimer()
         },
     }
 </script>
