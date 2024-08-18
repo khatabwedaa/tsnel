@@ -51,23 +51,23 @@ const start = () => {
             <div class="text-2xl">Score : <span class="font-semibold text-blue-600">{{ countScore }}</span></div>
         </div>
         <input v-model="model"
-            class="block px-4 py-2 mt-6 w-full text-gray-700 bg-gray-300 rounded border border-gray-300 appearance-none focus:outline-none focus:shadow-outline"
+            class="block px-4 py-2 mt-6 w-full text-gray-200 bg-gray-700 rounded border border-gray-700 appearance-none focus:outline-none focus:shadow-outline"
             type="email">
-        <button class="px-4 py-2 mt-6 w-full text-white uppercase bg-blue-600 rounded" @click="start">start</button>
-        <div v-if="countScore == 150" class="flex overflow-hidden fixed inset-0 z-50 justify-center items-center w-full"
+        <button class="px-4 py-2 mt-6 w-full text-gray-800 uppercase bg-blue-400 rounded" @click="start">start</button>
+        <div v-if="countScore == 200" class="flex overflow-hidden fixed inset-0 z-50 justify-center items-center w-full"
             style="background: rgba(0,0,0,.7);">
             <div
-                class="overflow-y-auto z-50 mx-auto w-11/12 bg-white rounded border border-blue-600 shadow-lg modal-container md:max-w-md">
+                class="overflow-y-auto z-50 mx-auto w-11/12 bg-gray-800 rounded border border-blue-600 shadow-lg modal-container md:max-w-md">
                 <div class="px-6 py-4 text-left modal-content">
                     <div class="flex justify-between items-center pb-3">
                         <p class="text-2xl font-bold">Winner</p>
                     </div>
                     <div class="my-5">
-                        <p>Winner winner chicken dinner</p>
+                        <p>Winner winner chicken dinner, boy you fast !</p>
                     </div>
                     <div class="flex justify-end pt-2">
                         <button @click="start"
-                            class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-500">Play Agin</button>
+                            class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-500">Play Again</button>
                     </div>
                 </div>
             </div>
