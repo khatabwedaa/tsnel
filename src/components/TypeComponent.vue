@@ -1,17 +1,64 @@
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+
+const word = ref('press start button');
+const countDown = ref(6);
+const model = ref('');
+const words = ref(['php', 'function', 'postman', 'variable', 'text', 'program', 'rust', 'writing', 'laravel', 'javascript', 'iphone', 'banana', 'world', 'cars', 'cats', 'code', 'games', 'faster', 'small', 'object']);
+const countScore = ref(0);
+const arr = ref(0);
+
+const isGameOver = computed(() => countDown.value <= 0 || countScore.value >= 200);
+
+const countDownTimer = () => {
+    if (!isGameOver.value) {
+        setTimeout(() => {
+            countDown.value--;
+            isTrue();
+            countDownTimer();
+        }, 1000);
+    }
+};
+
+const isTrue = () => {
+    if (word.value === model.value) {
+        countDown.value = 6;
+        model.value = '';
+        arr.value++;
+        word.value = words.value[arr.value];
+        countScore.value += 10;
+    }
+};
+
+const start = () => {
+    model.value = '';
+    arr.value = 0;
+    word.value = words.value[arr.value];
+    countScore.value = 0;
+    countDown.value = 5;
+    countDownTimer();
+};
+
+
+</script>
 <template>
     <div>
         <h1 class="text-3xl font-semibold">How Fast You Are ?</h1>
-        <div class="text-2xl mt-6">Type this word : <span class="text-blue-600 font-semibold">{{ word }}</span></div>
-        <div class="mt-2 text-xl text-red-500" v-if="countDown == 0">Loser try agine</div>
+        <div class="mt-6 text-2xl">Type this word : <span class="font-semibold text-blue-600">{{ word }}</span></div>
+        <div class="mt-2 text-xl text-red-500" v-if="countDown == 0">Sorry! try again</div>
         <div class="flex justify-between">
-            <div class="text-2xl">Time : <span class="text-blue-600 font-semibold">{{ countDown }}</span></div>
-            <div class="text-2xl">Score : <span class="text-blue-600 font-semibold">{{ countScore }}</span></div>
+            <div class="text-2xl">Time : <span class="font-semibold text-blue-600">{{ countDown }}</span></div>
+            <div class="text-2xl">Score : <span class="font-semibold text-blue-600">{{ countScore }}</span></div>
         </div>
-        <input v-model="model" class="mt-6 bg-gray-300 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email">
-        <button class="w-full mt-6 px-4 py-2 bg-blue-600 text-white uppercase rounded" @click="start">start</button>
-         <div v-if="countScore == 150" class="fixed w-full inset-0 z-50 overflow-hidden flex justify-center items-center" style="background: rgba(0,0,0,.7);">
-            <div class="border border-blue-600 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-                <div class="modal-content py-4 text-left px-6">
+        <input v-model="model"
+            class="block px-4 py-2 mt-6 w-full text-gray-700 bg-gray-300 rounded border border-gray-300 appearance-none focus:outline-none focus:shadow-outline"
+            type="email">
+        <button class="px-4 py-2 mt-6 w-full text-white uppercase bg-blue-600 rounded" @click="start">start</button>
+        <div v-if="countScore == 150" class="flex overflow-hidden fixed inset-0 z-50 justify-center items-center w-full"
+            style="background: rgba(0,0,0,.7);">
+            <div
+                class="overflow-y-auto z-50 mx-auto w-11/12 bg-white rounded border border-blue-600 shadow-lg modal-container md:max-w-md">
+                <div class="px-6 py-4 text-left modal-content">
                     <div class="flex justify-between items-center pb-3">
                         <p class="text-2xl font-bold">Winner</p>
                     </div>
@@ -19,54 +66,11 @@
                         <p>Winner winner chicken dinner</p>
                     </div>
                     <div class="flex justify-end pt-2">
-                        <button @click="start" class="px-4 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-500">Play Agin</button>
+                        <button @click="start"
+                            class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-500">Play Agin</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-<script>
-    export default {
-        data() {
-            return {
-                word: 'press start button',
-                countDown: 5,
-                model: '',
-                words: ['php' , 'john' , 'bostman' , 'steve' , 'text' , 'laracon' , 'laracast' , 'haha' , 'iphone' , 'banana' , 'world' , 'cars' , 'cats' , 'code' , 'games' , 'faster' , 'small' , 'king'],
-                countScore: 0 ,
-                arr: 0
-            }
-        },
-        methods : {
-            countDownTimer() {
-                if(this.countDown > 0 && this.countScore < 150) {
-                    setTimeout(() => {
-                        this.countDown -= 1
-                        this.isTrue()
-                        this.countDownTimer()
-                    }, 1000)
-                }
-            },
-            isTrue() {
-                if(this.word == this.model)
-                {
-                    this.countDown = 5
-                    this.model = ''
-                    this.word = this.words[this.arr]; this.arr++
-                    this.countScore += 10
-                }
-            },
-            start() {
-                this.model = ""
-                this.arr = 0
-                this.word = this.words[this.arr]; this.arr++
-                this.countScore = 0
-                this.countDown = 5
-                this.countDownTimer()
-                this.isTrue()
-            }
-        },
-    }
-</script>
